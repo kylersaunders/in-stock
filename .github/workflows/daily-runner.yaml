@@ -2,7 +2,7 @@ name: Scheduled Script Execution
 
 on:
   schedule:
-    - cron: '50 5 * * *' # 4:10 AM UTC
+    - cron: '57 5 * * *' # 4:10 AM UTC
 
 jobs:
   run_script:
