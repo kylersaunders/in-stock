@@ -1,0 +1,31 @@
+name: Scheduled Script Execution
+
+on:
+  schedule:
+    - cron: '0 10 * * *' # Runs at 10:00 UTC, which is 6:00 AM Eastern
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python (or your language)
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x' # Or your desired Python version
+
+      - name: Install dependencies (if any)
+        env:
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TARGET_SITE: ${{ secrets.TARGET_SITE }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+        run: pip install -r requirements.txt # If you have dependencies
+
+      - name: Run script
+        run: |
+          python main.py  
+          echo "Script completed"
