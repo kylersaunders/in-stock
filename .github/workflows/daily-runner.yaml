@@ -2,7 +2,7 @@ name: Scheduled Script Execution
 
 on:
   schedule:
-    - cron: '9 4 * * *' # 4:10 AM UTC
+    - cron: '17 5 * * *' # 4:10 AM UTC
 
 jobs:
   run_script:
@@ -18,14 +18,14 @@ jobs:
           python-version: '3.11' # Or your desired Python version
 
       - name: Install dependencies (if any)
+        run: pip install -r requirements.txt # If you have dependencies
+
+      - name: Run script
         env:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           TARGET_SITE: ${{ secrets.TARGET_SITE }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
           FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
-        run: pip install -r requirements.txt # If you have dependencies
-
-      - name: Run script
         run: |
           python main.py
           if [ $? -ne 0 ]; then
