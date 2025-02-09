@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python (or your language)
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x' # Or your desired Python version
+          python-version: '3.11' # Or your desired Python version
 
       - name: Install dependencies (if any)
         env:
@@ -27,5 +27,9 @@ jobs:
 
       - name: Run script
         run: |
-          python main.py  
+          python main.py
+          if [ $? -ne 0 ]; then
+            echo "Script failed!"
+            exit 1
+          fi
           echo "Script completed"
