@@ -3,11 +3,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# Access the variables
-app_password = os.getenv("GMAIL_APP_PASSWORD")
 
-
-def send_email(to_email, from_email, subject, body):
+def send_email(to_email, from_email, subject, body, app_password):
     # Create the email
     msg = MIMEMultipart()
     msg['From'] = from_email
